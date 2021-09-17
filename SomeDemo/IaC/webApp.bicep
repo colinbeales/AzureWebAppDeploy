@@ -11,7 +11,7 @@ param location string = resourceGroup().location
 param sku string = 'F1'
 
 resource plan 'Microsoft.Web/serverfarms@2020-12-01' = {
-  name: '${planname}'
+  name: planname
   location: location
   sku: {
     name: sku
@@ -23,7 +23,7 @@ resource plan 'Microsoft.Web/serverfarms@2020-12-01' = {
 }
 
 resource web 'Microsoft.Web/sites@2020-12-01' = {
-  name: '${webappname}'
+  name: webappname
   location: location
   identity: {
     type: 'SystemAssigned'
@@ -38,4 +38,3 @@ resource web 'Microsoft.Web/sites@2020-12-01' = {
 }
 
 output siteUrl string = 'https://${web.properties.defaultHostName}/'
-
