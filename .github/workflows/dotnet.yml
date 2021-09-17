@@ -22,4 +22,24 @@ jobs:
     - name: Build
       run: dotnet build SomeDemo --no-restore
     - name: Publish
-      run: dotnet publish SomeDemo 
+      run: dotnet publish SomeDemo --configuration Release --output './output/webapp'
+    - name: Copy
+      run: copy ./IaC/*.* ./output
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: website
+        path: ./output
+        
+  IaC:
+  
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.10
+      with:
+        name: website
+        path: ./output
+    - name: LS
+      run: ls ./output
+    
