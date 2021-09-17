@@ -24,7 +24,7 @@ jobs:
     - name: Publish
       run: dotnet publish SomeDemo --configuration Release --output './output/webapp'
     - name: Copy
-      run: copy ./IaC/*.* ./output
+      run: cp ./IaC/*.* ./output
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
@@ -34,6 +34,8 @@ jobs:
   IaC:
   
     runs-on: ubuntu-latest
+    needs: build
+    
     steps:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.0.10
