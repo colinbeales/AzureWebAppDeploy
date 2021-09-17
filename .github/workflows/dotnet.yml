@@ -58,5 +58,5 @@ jobs:
       uses: Azure/cli@1.0.4
       with:
         inlineScript: |
-          az deployment group create --name ${{env.RESOURCE_GROUP}} --template-file ./output/webApp.bicep --parameters webappname=${{env.WEBAPP_NAME}}
+          az deployment group create --resource-group ${{env.RESOURCE_GROUP}} --template-file ./output/webApp.bicep --parameters webappname=${{env.WEBAPP_NAME}}
         
