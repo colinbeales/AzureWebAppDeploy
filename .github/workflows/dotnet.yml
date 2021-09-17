@@ -45,3 +45,14 @@ jobs:
     - name: LS
       run: ls ./output
     
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Azure CLI Action
+      uses: Azure/cli@1.0.4
+      with:
+        inlineScript: |
+          az deployment sub create -f ./output/webApp.bicep -l uksouth
+        
