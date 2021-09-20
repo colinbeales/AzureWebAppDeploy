@@ -26,10 +26,12 @@ jobs:
         run: dotnet build SomeDemo --no-restore
       - name: Publish
         run: dotnet publish SomeDemo --configuration Release --output './webapp'
+      - name: Zip WebApp
+        run: |
+          zip -r webapp.zip ./webapp
+          cp webapp.zip ./output
       - name: Copy
         run: cp ./IaC/*.* ./output
-      - name: Zip WebApp
-        run: zip -r ./output/webapp.zip ./webapp
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
