@@ -72,6 +72,10 @@ jobs:
         with:
           name: website
           path: ./output
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy WebApp to Dev Slot
         uses: Azure/webapps-deploy@v2
         with:
