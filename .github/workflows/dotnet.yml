@@ -29,6 +29,7 @@ jobs:
       - name: Zip WebApp
         run: |
           zip -r webapp.zip ./webapp
+          mkdir ./output
           cp webapp.zip ./output/webapp.zip
       - name: Copy
         run: cp ./IaC/*.* ./output/*.*
