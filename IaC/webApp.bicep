@@ -39,7 +39,7 @@ resource web 'Microsoft.Web/sites@2020-12-01' = {
 }
 
 resource webDevSlot 'Microsoft.Web/sites/slots@2021-01-15' = {
-  name: '${web.name}/Dev'
+  name: '${web.name}/dev'
   location: location
   identity: {
     type: 'SystemAssigned'

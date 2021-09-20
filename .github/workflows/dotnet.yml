@@ -65,7 +65,7 @@ jobs:
     needs: IaC
     environment:
       name: Dev
-      url: "https://${{env.WEBAPP_NAME}}-Dev.azurewebsites.net"
+      url: "https://${{env.WEBAPP_NAME}}-dev.azurewebsites.net"
 
     steps:
       - name: Download a Build Artifact
@@ -81,5 +81,30 @@ jobs:
         uses: Azure/webapps-deploy@v2
         with:
           app-name: ${{env.WEBAPP_NAME}}
-          slot-name: Dev
+          slot-name: dev
           package: ./output
+
+
+    DeployProduction:
+    
+    runs-on: ubuntu-latest
+    needs: DeployDev
+    environment:
+      name: Production
+      url: "https://${{env.WEBAPP_NAME}}.azurewebsites.net"
+
+    steps:
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Swap slots
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az webapp deployment slot swap \
+            -g ${{env.RESOURCE_GROUP}} \
+            -n ${{env.WEBAPP_NAME}} \
+            --slot dev
+            --target production
