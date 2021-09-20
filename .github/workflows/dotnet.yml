@@ -25,12 +25,13 @@ jobs:
       - name: Build
         run: dotnet build SomeDemo --no-restore
       - name: Publish
-        run: dotnet publish SomeDemo --configuration Release --output './output'
+        run: dotnet publish SomeDemo/SomeDemo.csproj -c Release -o output
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: website
-          path: ./output
+          path: SimpleDemo/output/**
+          if-no-files-found: error
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
