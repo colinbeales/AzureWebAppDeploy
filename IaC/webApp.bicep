@@ -8,7 +8,7 @@ param planname string = 'mydemo-plan'
 param location string = resourceGroup().location
 
 @description('The web site hosting plan')
-param sku string = 'F1'
+param sku string = 'S1'
 
 resource plan 'Microsoft.Web/serverfarms@2020-12-01' = {
   name: planname
