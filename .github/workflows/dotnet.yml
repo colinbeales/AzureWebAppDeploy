@@ -29,9 +29,9 @@ jobs:
       - name: Zip WebApp
         run: |
           zip -r webapp.zip ./webapp
-          cp webapp.zip ./output
+          cp webapp.zip ./output/webapp.zip
       - name: Copy
-        run: cp ./IaC/*.* ./output
+        run: cp ./IaC/*.* ./output/*.*
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
