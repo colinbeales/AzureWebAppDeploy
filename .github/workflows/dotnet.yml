@@ -105,4 +105,4 @@ jobs:
               -g ${{env.RESOURCE_GROUP}} \
               -n ${{env.WEBAPP_NAME}} \
               --slot dev
-              --target production
+              --target-slot production
