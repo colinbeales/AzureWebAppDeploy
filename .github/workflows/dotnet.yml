@@ -25,7 +25,9 @@ jobs:
       - name: Build
         run: dotnet build SomeDemo --no-restore
       - name: Publish
-        run: dotnet publish SomeDemo --configuration Release --output './output/webapp'
+        run: dotnet publish SomeDemo --configuration Release --output './webapp'
+      - name: Zip WebApp
+        run: zip -r ./output/webapp.zip ./webapp
       - name: Copy
         run: cp ./IaC/*.* ./output
       - name: Upload a Build Artifact
@@ -78,4 +80,4 @@ jobs:
         with:
           app-name: ${{env.WEBAPP_NAME}}
           slot-name: Dev
-          package: ./output
+          package: ./output/webapp.zip
