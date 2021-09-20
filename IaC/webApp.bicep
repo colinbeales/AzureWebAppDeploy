@@ -32,9 +32,25 @@ resource web 'Microsoft.Web/sites@2020-12-01' = {
     httpsOnly: true
     serverFarmId: plan.id
     siteConfig: {
-      linuxFxVersion: 'DOTNETCORE|3.1'
+      linuxFxVersion: 'DOTNETCORE|5.1'
+    }
+  }
+}
+
+resource webDevSlot 'Microsoft.Web/sites/slots@2021-01-15' = {
+  name: '${web.name}/Dev'
+  location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    httpsOnly: true
+    serverFarmId: plan.id
+    siteConfig: {
+      linuxFxVersion: 'DOTNETCORE|5.1'
     }
   }
 }
 
 output siteUrl string = 'https://${web.properties.defaultHostName}/'
+output siteDevUrl string = 'https://${webDevSlot.properties.defaultHostName}/'
